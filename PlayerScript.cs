@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour {
     /// Speed
     /// </summary>
     public float speedRun = 10f;
-    public float speedJump = 10f;
+
 
     /// <summary>
     /// mouvement
@@ -15,9 +15,10 @@ public class PlayerScript : MonoBehaviour {
     private Vector2 movement;
 
     private bool grounded;
-    private Transform groundCheck;
+    public Transform groundCheck;
     private float groundRadius = 0.2f;
     public LayerMask whatIsGround;
+    private float jumpForce = 1500f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +39,7 @@ public class PlayerScript : MonoBehaviour {
 
         if (Input.GetKey("up") && grounded)
         {
-            transform.position += Vector3.up * speedJump * Time.deltaTime;
+            rigidbody2D.AddForce(new Vector2(0, jumpForce));
         }
 	}
 
