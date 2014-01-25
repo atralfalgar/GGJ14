@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
 
 	public string type = "normal";
 
+	private bool facingRight = true;
+
     // Death :
     public GameObject seuilTrou;
 
@@ -67,6 +69,13 @@ public class PlayerScript : MonoBehaviour
             else if (Input.GetButtonDown("A_1") && grounded && jumpForce > 0)
                 jump();
 		}
+		if(rigidbody2D.velocity.x > 0.1f && !facingRight){
+			facingRight = true;
+			Flip();
+		}else if(rigidbody2D.velocity.x<0.1f && facingRight){
+			facingRight = false;
+			Flip();
+		}
 	}
 
     void FixedUpdate()
@@ -84,6 +93,11 @@ public class PlayerScript : MonoBehaviour
         grounded = false;
         // We make sure we are not on the ground on the next frame
         transform.position = new Vector2(transform.position.x, transform.position.y + groundRadius * 2);
-        rigidbody2D.AddForce(new Vector2(pounceForce, jumpForce));
+        rigidbody2D.AddForce(new Vector2(facingRight ? pounceForce : -pounceForce, jumpForce));
     }
+
+	void Flip(){
+		Vector3 scale = gameObject.transform.localScale;
+		gameObject.transform.localScale = new Vector3(scale.x*-1f, scale.y, scale.z);
+	}
 }
