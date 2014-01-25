@@ -35,13 +35,9 @@ public class PlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+        // En cas de décès :
         if (transform.position.y <= seuilTrou.transform.position.y)
-        {
-            // Spawn en cas de décès :
-            transform.position = GameObject.Find("Spawn").transform.position;
-            if (active)
-                GameObject.Find("Main Camera").transform.position = new Vector3(GameObject.Find("Spawn").transform.position.x, GameObject.Find("Spawn").transform.position.y, -10.0f)/*new Vector3(0.0f, 0.0f, -10.0f)*/;
-        }
+            Application.LoadLevel("Scene1");
 
 		if(hover)
 			gameObject.renderer.material.color = Color.yellow;
