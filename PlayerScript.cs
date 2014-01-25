@@ -33,14 +33,14 @@ public class PlayerScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void Update()
     {
         if (transform.position.y <= seuilTrou.transform.position.y)
         {
-            // 'Test' pour la première salle :
-            transform.position = new Vector3(0.02f, 0.047f, 0.0f);
+            // Spawn en cas de décès :
+            transform.position = GameObject.Find("Spawn").transform.position;
             if (active)
-                GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
+                GameObject.Find("Main Camera").transform.position = new Vector3(GameObject.Find("Spawn").transform.position.x, GameObject.Find("Spawn").transform.position.y, -10.0f)/*new Vector3(0.0f, 0.0f, -10.0f)*/;
         }
 
 		if(hover)
