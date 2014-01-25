@@ -34,15 +34,10 @@ public class PlayerScript : MonoBehaviour
     {
         if (transform.position.y <= seuilTrou.transform.position.y)
         {
-            // Gérer le fait que le joueur a chuté !
-            if (type.Equals("normal"))
-            {
-                // Die Spieler ist ein grosse she***e !
-                // 'Test' pour la première salle :
-                transform.position = new Vector3(0.02f, 0.047f, 0.0f);
-                if (active)
-                    GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
-            }
+            // 'Test' pour la première salle :
+            transform.position = new Vector3(0.02f, 0.047f, 0.0f);
+            if (active)
+                GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
         }
 
 		if(hover)
@@ -51,39 +46,43 @@ public class PlayerScript : MonoBehaviour
 			gameObject.renderer.material.color = Color.white;
 		hover = false;
 
-        
+		if(active)
+        {
+            float inputX = 0.0f;
+            float inputX1 = Input.GetAxis("L_XAxis_1") - Input.GetAxis("L_YAxis_1");
+            float inputX2 = Input.GetAxis("L_XAxis_2") - Input.GetAxis("L_YAxis_2");
+            if (inputX1 == 0.0f)
+                inputX = inputX2;
+            else
+                inputX = inputX1;
 
-		if(active){
-
-		    //Retrieve the input
-			float inputX = Input.GetAxis("L_XAxis_2")-Input.GetAxis("L_YAxis_2");
-
-
-	        movement = inputX * runSpeed/5f;
+	        movement = inputX * runSpeed/5.0f;
 
 			//Check grounded
 			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
 			if (Input.GetButtonDown("A_2") && grounded && jumpForce > 0)
-			{
-				grounded = false;
-				// We make sure we are not on the ground on the next frame
-				transform.position = new Vector2(transform.position.x, transform.position.y + groundRadius*2);
-				rigidbody2D.AddForce(new Vector2(pounceForce, jumpForce));
-			}
-	        
+                jump();
+            else if (Input.GetButtonDown("A_1") && grounded && jumpForce > 0)
+                jump();
 		}
 	}
 
     void FixedUpdate()
     {
-
-
 		if(active && grounded){
 			float xSpeed = rigidbody2D.velocity.x + movement;
 			xSpeed = xSpeed > runSpeed ? runSpeed : xSpeed;
 			xSpeed = xSpeed < -runSpeed ? -runSpeed : xSpeed;
 			rigidbody2D.velocity = new Vector2(xSpeed, rigidbody2D.velocity.y);
 		}
+    }
+
+    private void jump()
+    {
+        grounded = false;
+        // We make sure we are not on the ground on the next frame
+        transform.position = new Vector2(transform.position.x, transform.position.y + groundRadius * 2);
+        rigidbody2D.AddForce(new Vector2(pounceForce, jumpForce));
     }
 }
