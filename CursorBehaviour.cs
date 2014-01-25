@@ -14,7 +14,7 @@ public class CursorBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if(this.gameObject.renderer.enabled){
-			float xAxis = Input.GetAxis("L_XAxis_1");
+			float xAxis = Input.GetAxis("Horizontal");
 			float yAxis = -Input.GetAxis("L_YAxis_1");
 
 			Vector2 pos = this.gameObject.transform.position;
