@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
 	void Update()
     {
         // En cas de décès :
-        if (transform.position.y <= seuilTrou.transform.position.y)
+        if (transform.position.y <= seuilTrou.transform.position.y && active)
             Application.LoadLevel("Scene1");
 
 		if(hover)
