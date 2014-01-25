@@ -22,7 +22,7 @@ public class TargetingRangeBehaviourScript : MonoBehaviour {
 		this.gameObject.transform.position = currentPlayer.transform.position;
 
 
-		if(Input.GetButtonDown("Y_1")){
+		if(Input.GetButtonDown("Y_2")){
 			if(!targeting){
 				targeting = true;
 				cursor.renderer.enabled = true;
@@ -49,7 +49,7 @@ public class TargetingRangeBehaviourScript : MonoBehaviour {
 			}else{
 				currentlySelected = currentPlayer;
 			}
-		}else if(Input.GetButtonUp("Y_1")){
+		}else if(Input.GetButtonUp("Y_2")){
 			if(targeting){
 				targeting = false;
 				cursor.renderer.enabled = false;

@@ -40,7 +40,8 @@ public class PlayerScript : MonoBehaviour
                 // Die Spieler ist ein grosse she***e !
                 // 'Test' pour la première salle :
                 transform.position = new Vector3(0.02f, 0.047f, 0.0f);
-                GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
+                if (active)
+                    GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
             }
         }
 
