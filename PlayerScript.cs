@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerScript : MonoBehaviour {
-
-    /// <summary>
+public class PlayerScript : MonoBehaviour
+{
     /// Speed
-    /// </summary>
     public float speedRun = 10f;
 
-
-    /// <summary>
     /// mouvement
-    /// </summary>
     private Vector2 movement;
 
     private bool grounded;
@@ -22,11 +17,11 @@ public class PlayerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         //Check grounded
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
@@ -39,7 +34,10 @@ public class PlayerScript : MonoBehaviour {
 
         if (Input.GetKey("up") && grounded)
         {
-            rigidbody2D.AddForce(new Vector2(0, jumpForce));
+            //rigidbody2D.AddForce(new Vector2(0, jumpForce));
+
+            // Solution facile, mais le sauf est régulier, stable et réel =P
+            transform.Translate(new Vector3(0.0f,1.5f,0.0f));
         }
 	}
 
