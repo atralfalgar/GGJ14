@@ -7,7 +7,7 @@ public class CameraScript : MonoBehaviour
     private int etat = 0;
 
     public GameObject joueur;
-    public float speed = 0.05f;
+    public float speed;
 
     void Start()
     {

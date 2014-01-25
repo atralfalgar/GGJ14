@@ -21,6 +21,9 @@ public class PlayerScript : MonoBehaviour
 
 	public string type = "normal";
 
+    // Death :
+    public GameObject seuilTrou;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -29,6 +32,18 @@ public class PlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (transform.position.y <= seuilTrou.transform.position.y)
+        {
+            // Gérer le fait que le joueur a chuté !
+            if (type.Equals("normal"))
+            {
+                // Die Spieler ist ein grosse she***e !
+                // 'Test' pour la première salle :
+                transform.position = new Vector3(0.02f, 0.047f, 0.0f);
+                GameObject.Find("Main Camera").transform.position = new Vector3(0.0f, 0.0f, -10.0f);
+            }
+        }
+
 		if(hover)
 			gameObject.renderer.material.color = Color.yellow;
 		else
@@ -48,7 +63,7 @@ public class PlayerScript : MonoBehaviour
 			//Check grounded
 			grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
 
-			if (Input.GetButtonDown("A_2") && grounded)
+			if (Input.GetButtonDown("A_2") && grounded && jumpForce > 0)
 			{
 				grounded = false;
 				// We make sure we are not on the ground on the next frame

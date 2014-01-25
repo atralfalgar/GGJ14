@@ -13,7 +13,6 @@ public class TargetingRangeBehaviourScript : MonoBehaviour {
 	bool targeting = false;
 	// Use this for initialization
 	void Start () {
-		currentPlayer = GameObject.Find("Body1");
 		cursor = GameObject.Find("Cursor");
 	}
 	
@@ -23,15 +22,20 @@ public class TargetingRangeBehaviourScript : MonoBehaviour {
 		this.gameObject.transform.position = currentPlayer.transform.position;
 
 
-		if(Input.GetAxis("TriggersR_2") > 0.9f){
+		if(Input.GetButtonDown("Y_1")){
 			if(!targeting){
 				targeting = true;
-				
 				cursor.renderer.enabled = true;
 				cursor.transform.position = new Vector2(this.gameObject.transform.position.x, this.transform.position.y);
 				
 			}
 			Collider2D[] selectedBodies = Physics2D.OverlapCircleAll(this.gameObject.transform.position, 2, controllableCharacters);
+			// Check to remove our player from selectedBodies
+			int index = -1;
+			for(int i =  0 ; i < selectedBodies.Length ; i++){
+				if(selectedBodies[i] == this) selectedBodies[i] = null;
+			}
+
 
 			if(selectedBodies.Length > 0){
 				Collider2D closest = selectedBodies[0];
@@ -45,7 +49,7 @@ public class TargetingRangeBehaviourScript : MonoBehaviour {
 			}else{
 				currentlySelected = currentPlayer;
 			}
-		}else{
+		}else if(Input.GetButtonUp("Y_1")){
 			if(targeting){
 				targeting = false;
 				cursor.renderer.enabled = false;
