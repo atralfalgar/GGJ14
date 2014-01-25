@@ -26,7 +26,8 @@ public class PlayerScript : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		
+		if(seuilTrou == null)
+			seuilTrou = GameObject.Find("Trou");
 	}
 	
 	// Update is called once per frame
@@ -49,8 +50,8 @@ public class PlayerScript : MonoBehaviour
 		if(active)
         {
             float inputX = 0.0f;
-            float inputX1 = Input.GetAxis("L_XAxis_1") - Input.GetAxis("L_YAxis_1");
-            float inputX2 = Input.GetAxis("L_XAxis_2") - Input.GetAxis("L_YAxis_2");
+            float inputX1 = Input.GetAxis("L_XAxis_1") ;
+            float inputX2 = Input.GetAxis("L_XAxis_2") ;
             if (inputX1 == 0.0f)
                 inputX = inputX2;
             else
