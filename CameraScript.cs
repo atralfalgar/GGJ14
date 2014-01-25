@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class CamraScript : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
     // Constantes :
     private Vector3 speedScrolling;
